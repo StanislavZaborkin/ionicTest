@@ -1,26 +1,65 @@
-// Ionic Starter App
+/**
+ * Created by Станислав on 09.12.2017.
+ */
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('ionicApp', ['ionic'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs).
-    // The reason we default this to hidden is that native apps don't usually show an accessory bar, at
-    // least on iOS. It's a dead giveaway that an app is using a Web View. However, it's sometimes
-    // useful especially with forms, though we would prefer giving the user a little more room
-    // to interact with the app.
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
-    }
-    if (window.StatusBar) {
-      // Set the statusbar to use the default style, tweak this to
-      // remove the status bar on iOS or change it to use white instead of dark colors.
-      StatusBar.styleDefault();
-    }
-  });
-});
+    .controller('AppCtrl', function($scope, $ionicModal) {
+
+        $scope.listToDo = [
+            {
+                title: 'firstThing',
+                description: 'to learn JS',
+                started: false
+            },
+            {
+                title: 'secondThing',
+                description: 'to learn Angular',
+                started: false
+            }
+        ];
+
+        $scope.listDoing = [
+            {
+                title: 'thirdThing',
+                description: 'to learn JS',
+                started: true
+            },
+            {
+                title: 'fourthThing',
+                description: 'to learn Angular',
+                started: true
+            }
+        ];
+
+        $scope.listDone = [
+            {
+                title: 'fifthThing',
+                description: 'to learn JS',
+                started: true
+            },
+            {
+                title: 'sixthThing',
+                description: 'to learn Angular',
+                started: true
+            }
+        ];
+
+        $ionicModal.fromTemplateUrl('modal-template.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.modal = modal;
+        });
+
+        $scope.addThing = function(u) {
+            if (u.started === true) {
+                $scope.listDoing.push({ title: u.title, description: u.description, started: u.started });
+                $scope.modal.hide();
+            }
+            else {
+                $scope.listToDo.push({ title: u.title, description: u.description, started: u.started });
+                $scope.modal.hide();
+            }
+        };
+
+    });
