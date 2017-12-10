@@ -38,32 +38,18 @@
               {{'Description: ' + item.description}}
             </div>
             <div class="item item-text-wrap">
-              {{'Started: ' +  item.started}}
+              <ion-checkbox ng-model="item.started" ng-change="addToDoingList(item)">Start the task?</ion-checkbox>
             </div>
+
           </div>
+         <!-- <button class="button" ng-click="A()">CLICK A</button>
+          <button class="button" ng-click="B()">CLICK B</button>
+          <div>{{button_A}}</div>
+          <div>{{totalTime}}</div>-->
+
         </div>
       </ion-list>
     </ion-content>
-
-    <script id="templates/modal.html" type="text/ng-template">
-      <ion-modal-view>
-        <ion-header-bar class="bar bar-header bar-positive">
-          <h1 class="title">New Contact</h1>
-          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
-        </ion-header-bar>
-        <ion-content class="padding">
-          <div class="list">
-            <label class="item item-input">
-              <input ng-model="newThing.title" type="text" placeholder="Title">
-            </label>
-            <label class="item item-input">
-              <input ng-model="newThing.description" type="text" placeholder="Description">
-            </label>
-            <button class="button button-full button-positive" ng-click="addThing(newThing)">Create</button>
-          </div>
-        </ion-content>
-      </ion-modal-view>
-    </script>
 
   </ion-tab>
 
@@ -84,7 +70,10 @@
               {{'Description: ' + item.description}}
             </div>
             <div class="item item-text-wrap">
-              {{'Started: ' +  item.started}}
+              Started: {{item.started | date:'MMM d, y h:mm:ss a'}}
+            </div>
+            <div class="item item-text-wrap">
+              <ion-checkbox ng-model="item.finished" ng-change="addToDoneList(item)">Finish the task?</ion-checkbox>
             </div>
           </div>
         </div>
@@ -109,10 +98,15 @@
                 {{'Description: ' + item.description}}
               </div>
               <div class="item item-text-wrap">
-                {{'Started: ' +  item.started}}
+                {{'Started: ' + item.started | date:'MMM d, y h:mm:ss a'}}
+                {{'Finished:' + item.finished | date:'MMM d, y h:mm:ss a'}}
+              </div>
+              <div class="item item-text-wrap">
+                {{'Total time: ' + item.totalTime}}
               </div>
             </div>
           </div>
+
         </ion-list>
       </ion-content>
 
