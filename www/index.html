@@ -17,7 +17,6 @@
 <ion-tabs class="tabs-positive tabs-icon-top">
 
   <ion-tab title="ToDo" icon-on="ion-ios-paper" icon-off="ion-ios-paper-outline">
-    <!--Tab 1 content-->
     <ion-header-bar class="bar-positive">
       <h1 class="title">ToDo</h1>
       <div class="buttons">
@@ -32,20 +31,18 @@
         <div class="card">
           <div ng-repeat="item in listToDo">
             <div class="item item-divider">
-              {{'Title: ' + item.title}}
+              <span>Title: </span>
+              <b>{{item.title}}</b>
             </div>
             <div class="item item-text-wrap">
-              {{'Description: ' + item.description}}
+              <span>Description: </span>
+              <b>{{item.description}}</b>
             </div>
             <div class="item item-text-wrap">
-              <ion-checkbox ng-model="item.started" ng-change="addToDoingList(item)">Start the task?</ion-checkbox>
+              <ion-checkbox ng-model="item.started" ng-change="addToDoingList(item)">Check to start</ion-checkbox>
             </div>
 
           </div>
-         <!-- <button class="button" ng-click="A()">CLICK A</button>
-          <button class="button" ng-click="B()">CLICK B</button>
-          <div>{{button_A}}</div>
-          <div>{{totalTime}}</div>-->
 
         </div>
       </ion-list>
@@ -64,16 +61,19 @@
         <div class="card">
           <div ng-repeat="item in listDoing">
             <div class="item item-divider">
-              {{'Title: ' + item.title}}
+              <span>Title: </span>
+              <b>{{item.title}}</b>
             </div>
             <div class="item item-text-wrap">
-              {{'Description: ' + item.description}}
+              <span>Description: </span>
+              <b>{{item.description}}</b>
             </div>
             <div class="item item-text-wrap">
-              Started: {{item.started | date:'MMM d, y h:mm:ss a'}}
+              <span>Started: </span>
+              <b>{{item.started | date:'MMM d, y h:mm:ss a'}}</b>
             </div>
             <div class="item item-text-wrap">
-              <ion-checkbox ng-model="item.finished" ng-change="addToDoneList(item)">Finish the task?</ion-checkbox>
+              <ion-checkbox ng-model="item.finished" ng-change="addToDoneList(item)">Check to finish</ion-checkbox>
             </div>
           </div>
         </div>
@@ -92,17 +92,22 @@
           <div class="card">
             <div ng-repeat="item in listDone">
               <div class="item item-divider">
-                {{'Title: ' + item.title}}
+                <span>Title: </span>
+                <b>{{item.title}}</b>
               </div>
               <div class="item item-text-wrap">
-                {{'Description: ' + item.description}}
+                <span>Description: </span>
+                <b>{{item.description}}</b>
               </div>
               <div class="item item-text-wrap">
-                {{'Started: ' + item.started | date:'MMM d, y h:mm:ss a'}}
-                {{'Finished:' + item.finished | date:'MMM d, y h:mm:ss a'}}
+                <span>Started: </span>
+                <b>{{item.started | date:'MMM d, y h:mm:ss a'}}</b>
+                <span>Finished: </span>
+                <b>{{item.finished | date:'MMM d, y h:mm:ss a'}}</b>
               </div>
               <div class="item item-text-wrap">
-                {{'Total time: ' + item.totalTime}}
+                <span>Total time: </span>
+                <b>{{item.totalTime}}</b>
               </div>
             </div>
           </div>

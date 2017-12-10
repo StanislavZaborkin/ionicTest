@@ -8,14 +8,14 @@ angular.module('ionicApp', ['ionic'])
 
         $scope.listToDo = [
             {
-                title: 'firstThing',
+                title: 'First thing to do',
                 description: 'to learn JS',
                 started: false,
                 finished: false
             },
             {
-                title: 'secondThing',
-                description: 'to learn Angular',
+                title: 'Second  thing to do',
+                description: 'to learn AngularJS',
                 started: false,
                 finished: false
             }
@@ -23,14 +23,14 @@ angular.module('ionicApp', ['ionic'])
 
         $scope.listDoing = [
             {
-                title: 'thirdThing',
-                description: 'to learn JS',
+                title: 'Third thing to do',
+                description: 'to learn HTTP-requests',
                 started: 'Dec 10, 2017 2:30:59 PM',
                 finished: false
             },
             {
-                title: 'fourthThing',
-                description: 'to learn Angular',
+                title: 'Fourth thing to do',
+                description: 'to make first project using Ionic & AngularJS',
                 started: 'Dec 10, 2017 4:40:59 PM',
                 finished: false
             }
@@ -38,18 +38,18 @@ angular.module('ionicApp', ['ionic'])
 
         $scope.listDone = [
             {
-                title: 'fifthThing',
-                description: 'to learn JS',
-                started: true,
-                finished: true,
-                totalTime: ''
+                title: 'Fifth thing to do',
+                description: 'to learn HTML',
+                started: 'Dec 9, 2017 1:26:49 PM',
+                finished: 'Dec 10, 2017 2:30:59 PM',
+                totalTime: 'Days: 1 Hours: 4 Minutes: 3 Seconds: 10'
             },
             {
-                title: 'sixthThing',
-                description: 'to learn Angular',
-                started: true,
-                finished: true,
-                totalTime: ''
+                title: 'Sixth  thing to do',
+                description: 'to learn CSS',
+                started: 'Dec 10, 2017 2:28:29 PM',
+                finished: 'Dec 10, 2017 2:30:59 PM',
+                totalTime: 'Days: 0 Hours: 2 Minutes: 2 Seconds: 30'
             }
         ];
 
@@ -70,12 +70,11 @@ angular.module('ionicApp', ['ionic'])
             }
         };
 
+
         $scope.addToDoingList = function(u) {
                 $scope.listToDo.pop(u);
                 $scope.listDoing.push({ title: u.title, description: u.description, started: new Date() });
                 $scope.modal.hide();
-            //alert('Moved to doing');
-
         };
 
         $scope.addToDoneList = function(u) {
@@ -83,26 +82,12 @@ angular.module('ionicApp', ['ionic'])
 
                 $scope.listDoing.pop(u);
 
-                $scope.totalTimes = ('Total time spent: ' + 'Days: ' + (u.started.getDate() - $scope.end.getDate())*(-1) +
+                $scope.totalTimes = ('Days: ' + (u.started.getDate() - $scope.end.getDate())*(-1) +
                 ' Hours: ' + (u.started.getHours() - $scope.end.getHours())*(-1) +
                 ' Minutes: ' + (u.started.getMinutes() - $scope.end.getMinutes())*(-1) +
-                ' Secondsssssssss: ' + (u.started.getSeconds() - $scope.end.getSeconds())*(-1) );
+                ' Seconds: ' + (u.started.getSeconds() - $scope.end.getSeconds())*(-1) );
 
                 $scope.listDone.push({ title: u.title, description: u.description, started: u.started, finished: new Date(), totalTime: $scope.totalTimes });
                 $scope.modal.hide();
-
         };
-
-        /*$scope.A = function(){
-            $scope.button_A = new Date();
-        };
-        $scope.B = function(){
-            $scope.button_B = new Date();
-
-            $scope.totalTime = ('Total time spent: ' + 'Days: ' + ($scope.button_A.getDay() - $scope.button_B.getDay())*(-1) +
-            ' Hours: ' + ($scope.button_A.getHours() - $scope.button_B.getHours())*(-1) +
-            ' Minutes: ' + ($scope.button_A.getMinutes() - $scope.button_B.getMinutes())*(-1) +
-            ' Seconds: ' + ($scope.button_A.getSeconds() - $scope.button_B.getSeconds())*(-1) );
-        };*/
-
     });
