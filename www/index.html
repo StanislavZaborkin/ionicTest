@@ -6,7 +6,7 @@
   <title>ToDo</title>
 
   <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="lib/ionic/css/custom.css">
   <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
   <script src="js/app.js"></script>
 </head>
@@ -41,8 +41,17 @@
             <div class="item item-text-wrap">
               <ion-checkbox ng-model="item.started" ng-change="addToDoingList(item)">Check to start</ion-checkbox>
             </div>
+            <button class="button button-assertive" ng-click="deleteThing(item)">Click to delete item</button>
 
           </div>
+
+          <div ng-repeat="itemm in obtained_array">
+            {{itemm.title}}
+          </div>
+
+<!--
+          <button class="button" ng-click="shit()">Console</button>
+-->
 
         </div>
       </ion-list>

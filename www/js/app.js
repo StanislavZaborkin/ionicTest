@@ -5,8 +5,7 @@
 angular.module('ionicApp', ['ionic'])
 
     .controller('AppCtrl', function($scope, $ionicModal) {
-
-        $scope.listToDo = [
+      $scope.listToDo = [
             {
                 title: 'First thing to do',
                 description: 'to learn JS',
@@ -53,6 +52,11 @@ angular.module('ionicApp', ['ionic'])
             }
         ];
 
+        /*$scope.obtained_array = [{
+          title: '',
+          description: ''
+        }];*/
+
         $ionicModal.fromTemplateUrl('modal-template.html', {
             scope: $scope
         }).then(function(modal) {
@@ -72,7 +76,7 @@ angular.module('ionicApp', ['ionic'])
 
 
         $scope.addToDoingList = function(u) {
-                $scope.listToDo.pop(u);
+                $scope.listToDo.splice($scope.listToDo.indexOf(u), 1);
                 $scope.listDoing.push({ title: u.title, description: u.description, started: new Date() });
                 $scope.modal.hide();
         };
@@ -80,7 +84,7 @@ angular.module('ionicApp', ['ionic'])
         $scope.addToDoneList = function(u) {
                 $scope.end = new Date();
 
-                $scope.listDoing.pop(u);
+          $scope.listDoing.splice($scope.listDoing.indexOf(u), 1);
 
                 $scope.totalTimes = ('Days: ' + (u.started.getDate() - $scope.end.getDate())*(-1) +
                 ' Hours: ' + (u.started.getHours() - $scope.end.getHours())*(-1) +
@@ -90,4 +94,34 @@ angular.module('ionicApp', ['ionic'])
                 $scope.listDone.push({ title: u.title, description: u.description, started: u.started, finished: new Date(), totalTime: $scope.totalTimes });
                 $scope.modal.hide();
         };
+
+        $scope.deleteThing = function(u) {
+            $scope.listToDo.splice($scope.listToDo.indexOf(u), 1);
+        };
+
+        // $scope.shit = function() {
+        //   $scope.msgArray = [
+        //     {
+        //       title: 'First thing to do',
+        //       description: 'to learn JS',
+        //       started: false,
+        //       finished: false
+        //     }
+        //   ];
+        //   localStorage.setItem("testArr",JSON.stringify($scope.msgArray));
+        //   $scope.obtained_array = localStorage.getItem("testArr");
+        //
+        //   console.log($scope.obtained_array);
+        // };
+
+        $scope.saveToLocal = function (i) {
+          $scope.name = new Date();
+          localStorage.setItem($scope.name,JSON.stringify(i));
+          $scope.obtained_array = localStorage.getItem($scope.name);
+          // set --> get --> parse --> set
+          // потом записать все в переменную и через неё выводить в ng-repeat
+          console.log($scope.obtained_array);
+          $scope.modal.hide();
+        }
+
     });
