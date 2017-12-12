@@ -52,11 +52,6 @@ angular.module('ionicApp', ['ionic'])
             }
         ];
 
-        /*$scope.obtained_array = [{
-          title: '',
-          description: ''
-        }];*/
-
         $ionicModal.fromTemplateUrl('modal-template.html', {
             scope: $scope
         }).then(function(modal) {
@@ -99,28 +94,23 @@ angular.module('ionicApp', ['ionic'])
             $scope.listToDo.splice($scope.listToDo.indexOf(u), 1);
         };
 
-        // $scope.shit = function() {
-        //   $scope.msgArray = [
-        //     {
-        //       title: 'First thing to do',
-        //       description: 'to learn JS',
-        //       started: false,
-        //       finished: false
-        //     }
-        //   ];
-        //   localStorage.setItem("testArr",JSON.stringify($scope.msgArray));
-        //   $scope.obtained_array = localStorage.getItem("testArr");
-        //
-        //   console.log($scope.obtained_array);
-        // };
+        $scope.indexIt = 1;
 
         $scope.saveToLocal = function (i) {
-          $scope.name = new Date();
+          $scope.name = $scope.indexIt++;
+
           localStorage.setItem($scope.name,JSON.stringify(i));
-          $scope.obtained_array = localStorage.getItem($scope.name);
+
+            $scope.obtained_array = localStorage.getItem($scope.name);
+            //$scope.newArr = [{}];
+            $scope.newOb = angular.fromJson($scope.obtained_array);
+            //$scope.newArr.push({title: $scope.newOb.title, description: $scope.newOb.description});
+            $scope.newArr = angular.toJson($scope.newOb);
+            localStorage.setItem($scope.name, JSON.stringify($scope.newArr));
           // set --> get --> parse --> set
           // потом записать все в переменную и через неё выводить в ng-repeat
-          console.log($scope.obtained_array);
+          console.log($scope.newArr);
+
           $scope.modal.hide();
         }
 
