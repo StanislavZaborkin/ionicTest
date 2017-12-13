@@ -94,24 +94,30 @@ angular.module('ionicApp', ['ionic'])
             $scope.listToDo.splice($scope.listToDo.indexOf(u), 1);
         };
 
-        $scope.indexIt = 1;
+        $scope.arrr = [];
 
         $scope.saveToLocal = function (i) {
-          $scope.name = $scope.indexIt++;
+          $scope.objectT = [];
+          if (!i) {
+            $scope.arrr.push({title: i.title, description: i.description});
+          }
+          else {
+            $scope.objectT = [];
+            $scope.objectT = localStorage.getItem(JSON.parse("Tasks"));
+            //JSON.parse($scope.objectT);
+            $scope.arrr.push({title: $scope.objectT.title, description: $scope.objectT.description});
+          }
+          localStorage.setItem("Tasks", JSON.stringify($scope.arrr));
 
-          localStorage.setItem($scope.name,JSON.stringify(i));
 
-            $scope.obtained_array = localStorage.getItem($scope.name);
-            //$scope.newArr = [{}];
-            $scope.newOb = angular.fromJson($scope.obtained_array);
-            //$scope.newArr.push({title: $scope.newOb.title, description: $scope.newOb.description});
-            $scope.newArr = angular.toJson($scope.newOb);
-            localStorage.setItem($scope.name, JSON.stringify($scope.newArr));
+          //$scope.newOb = angular.fromJson($scope.newArray);
+
+
           // set --> get --> parse --> set
           // потом записать все в переменную и через неё выводить в ng-repeat
-          console.log($scope.newArr);
 
           $scope.modal.hide();
-        }
-
+        };
     });
+
+
