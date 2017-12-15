@@ -28,7 +28,7 @@
     <ion-content>
       <ion-list>
         <div class="card">
-          <div ng-repeat="item in arrr track by $index">
+          <div ng-repeat="item in arrr track by $index" ng-if="item.started == null ">
             <div class="item item-divider">
               <span>Title: </span>
               <b>{{item.title}}</b>
@@ -60,7 +60,7 @@
     <ion-content>
       <ion-list>
         <div class="card">
-          <div ng-repeat="item in listDoing">
+          <div ng-repeat="item in arrr track by $index" ng-if="item.started != null">
             <div class="item item-divider">
               <span>Title: </span>
               <b>{{item.title}}</b>
@@ -76,6 +76,7 @@
             <div class="item item-text-wrap">
               <ion-checkbox ng-model="item.finished" ng-change="addToDoneList(item)">Check to finish</ion-checkbox>
             </div>
+            <button class="button button-assertive" ng-click="deleteThing(item)">Click to delete item</button>
           </div>
         </div>
       </ion-list>
@@ -91,7 +92,7 @@
       <ion-content>
         <ion-list>
           <div class="card">
-            <div ng-repeat="item in listDone">
+            <div ng-repeat="item in arrr track by $index" ng-if="item.finished == true">
               <div class="item item-divider">
                 <span>Title: </span>
                 <b>{{item.title}}</b>
@@ -110,6 +111,7 @@
                 <span>Total time: </span>
                 <b>{{item.totalTime}}</b>
               </div>
+              <button class="button button-assertive" ng-click="deleteThing(item)">Click to delete item</button>
             </div>
           </div>
 

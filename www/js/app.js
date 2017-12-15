@@ -5,52 +5,7 @@
 angular.module('ionicApp', ['ionic'])
 
     .controller('AppCtrl', function($scope, $ionicModal) {
-      $scope.listToDo = [
-            {
-                title: 'First thing to do',
-                description: 'to learn JS',
-                started: false,
-                finished: false
-            },
-            {
-                title: 'Second  thing to do',
-                description: 'to learn AngularJS',
-                started: false,
-                finished: false
-            }
-        ];
 
-        $scope.listDoing = [
-            {
-                title: 'Third thing to do',
-                description: 'to learn HTTP-requests',
-                started: 'Dec 10, 2017 2:30:59 PM',
-                finished: false
-            },
-            {
-                title: 'Fourth thing to do',
-                description: 'to make first project using Ionic & AngularJS',
-                started: 'Dec 10, 2017 4:40:59 PM',
-                finished: false
-            }
-        ];
-
-        $scope.listDone = [
-            {
-                title: 'Fifth thing to do',
-                description: 'to learn HTML',
-                started: 'Dec 9, 2017 1:26:49 PM',
-                finished: 'Dec 10, 2017 2:30:59 PM',
-                totalTime: 'Days: 1 Hours: 4 Minutes: 3 Seconds: 10'
-            },
-            {
-                title: 'Sixth  thing to do',
-                description: 'to learn CSS',
-                started: 'Dec 10, 2017 2:28:29 PM',
-                finished: 'Dec 10, 2017 2:30:59 PM',
-                totalTime: 'Days: 0 Hours: 2 Minutes: 2 Seconds: 30'
-            }
-        ];
 
         $ionicModal.fromTemplateUrl('modal-template.html', {
             scope: $scope
@@ -60,66 +15,51 @@ angular.module('ionicApp', ['ionic'])
 
         $scope.addThing = function(u) {
             if (u.started === true) {
-                $scope.listDoing.push({ title: u.title, description: u.description, started: new Date() });
+                $scope.arrr.push({ title: u.title, description: u.description, started: new Date() });
                 $scope.modal.hide();
             }
             else {
-                $scope.listToDo.push({ title: u.title, description: u.description });
+                $scope.arrr.push({ title: u.title, description: u.description });
                 $scope.modal.hide();
             }
         };
 
 
         $scope.addToDoingList = function(u) {
-                $scope.arrr.splice($scope.listToDo.indexOf(u), 1);
-                $scope.listDoing.push({ title: u.title, description: u.description, started: new Date() });
-                $scope.modal.hide();
+                $scope.arrr.splice($scope.arrr.indexOf(u), 1);
+                $scope.arrr.push({ title: u.title, description: u.description, started: new Date() });
+                localStorage.setItem('list', JSON.stringify($scope.arrr));
         };
 
         $scope.addToDoneList = function(u) {
-                $scope.end = new Date();
 
-          $scope.listDoing.splice($scope.listDoing.indexOf(u), 1);
+                // $scope.end = new Date();
+                //
+                // $scope.totalTimes = ('Days: ' + (u.started.getDate() - $scope.end.getDate())*(-1) +
+                // ' Hours: ' + (u.started.getHours() - $scope.end.getHours())*(-1) +
+                // ' Minutes: ' + (u.started.getMinutes() - $scope.end.getMinutes())*(-1) +
+                // ' Seconds: ' + (u.started.getSeconds() - $scope.end.getSeconds())*(-1) );
+                //
+                // $scope.arrr.splice($scope.arrr.indexOf(u), 1);
+                // $scope.arrr.push({ title: u.title, description: u.description, started: u.started, finished: new Date(), totalTime: $scope.totalTimes });
+                // localStorage.setItem('list', JSON.stringify($scope.arrr));
 
-                $scope.totalTimes = ('Days: ' + (u.started.getDate() - $scope.end.getDate())*(-1) +
-                ' Hours: ' + (u.started.getHours() - $scope.end.getHours())*(-1) +
-                ' Minutes: ' + (u.started.getMinutes() - $scope.end.getMinutes())*(-1) +
-                ' Seconds: ' + (u.started.getSeconds() - $scope.end.getSeconds())*(-1) );
-
-                $scope.listDone.push({ title: u.title, description: u.description, started: u.started, finished: new Date(), totalTime: $scope.totalTimes });
-                $scope.modal.hide();
+              // прочитать про дейт на лерн джс. нужно перезаписать объекты в этой функции
         };
 
-        // $scope.deleteThing = function(u) {
-        //     $scope.arrr.splice($scope.arrr.indexOf(u), 1);
-        // };
+        $scope.deleteThing = function(u) {
+            $scope.arrr.splice($scope.arrr.indexOf(u), 1);
+            localStorage.setItem('list', JSON.stringify($scope.arrr));
+        };
 
 
       $scope.arrr = JSON.parse(localStorage.getItem('list'));
-        //$scope.arrr = [];
 
         $scope.saveToLocal = function (i) {
 
           $scope.arrr.push({title: i.title, description: i.description});
 
           localStorage.setItem('list', JSON.stringify($scope.arrr));
-
-
-         /* $scope.objectT = [];
-          if (!i) {
-            $scope.arrr.push({title: i.title, description: i.description});
-          }
-          else {
-            localStorage.setItem("tasks", JSON.stringify(i));
-            $scope.objectT = localStorage.getItem(JSON.parse("tasks"));
-            //$scope.arrr.push({title: $scope.objectT.title, description: $scope.objectT.description});
-          }
-          localStorage.setItem("Tasks", JSON.stringify($scope.arrr));*/
-
-
-
-          // set --> get --> parse --> set
-          // потом записать все в переменную и через неё выводить в ng-repeat
 
           $scope.modal.hide();
         };
