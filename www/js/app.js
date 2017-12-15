@@ -71,7 +71,7 @@ angular.module('ionicApp', ['ionic'])
 
 
         $scope.addToDoingList = function(u) {
-                $scope.listToDo.splice($scope.listToDo.indexOf(u), 1);
+                $scope.arrr.splice($scope.listToDo.indexOf(u), 1);
                 $scope.listDoing.push({ title: u.title, description: u.description, started: new Date() });
                 $scope.modal.hide();
         };
@@ -90,27 +90,32 @@ angular.module('ionicApp', ['ionic'])
                 $scope.modal.hide();
         };
 
-        $scope.deleteThing = function(u) {
-            $scope.listToDo.splice($scope.listToDo.indexOf(u), 1);
-        };
+        // $scope.deleteThing = function(u) {
+        //     $scope.arrr.splice($scope.arrr.indexOf(u), 1);
+        // };
 
-        $scope.arrr = [];
+
+      $scope.arrr = JSON.parse(localStorage.getItem('list'));
+        //$scope.arrr = [];
 
         $scope.saveToLocal = function (i) {
-          $scope.objectT = [];
+
+          $scope.arrr.push({title: i.title, description: i.description});
+
+          localStorage.setItem('list', JSON.stringify($scope.arrr));
+
+
+         /* $scope.objectT = [];
           if (!i) {
             $scope.arrr.push({title: i.title, description: i.description});
           }
           else {
-            $scope.objectT = [];
-            $scope.objectT = localStorage.getItem(JSON.parse("Tasks"));
-            //JSON.parse($scope.objectT);
-            $scope.arrr.push({title: $scope.objectT.title, description: $scope.objectT.description});
+            localStorage.setItem("tasks", JSON.stringify(i));
+            $scope.objectT = localStorage.getItem(JSON.parse("tasks"));
+            //$scope.arrr.push({title: $scope.objectT.title, description: $scope.objectT.description});
           }
-          localStorage.setItem("Tasks", JSON.stringify($scope.arrr));
+          localStorage.setItem("Tasks", JSON.stringify($scope.arrr));*/
 
-
-          //$scope.newOb = angular.fromJson($scope.newArray);
 
 
           // set --> get --> parse --> set
