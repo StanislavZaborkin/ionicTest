@@ -1,0 +1,18 @@
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+    <h1 class="title">Create new thing to do</h1>
+    <button class="button button-clear button-primary" ng-click="modal.hide()">Close</button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <label class="item item-input">
+        <input ng-model="newThing.title" type="text" placeholder="Title">
+      </label>
+      <label class="item item-input">
+        <input ng-model="newThing.description" type="text" placeholder="Description">
+      </label>
+      <ion-checkbox ng-model="newThing.started">Start the task?</ion-checkbox>
+      <button class="button button-full button-positive" ng-click="saveToLocal(newThing)">Save to local</button>
+    </div>
+  </ion-content>
+</ion-modal-view>
